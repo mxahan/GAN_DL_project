@@ -66,16 +66,16 @@ train_data = train_data.repeat().shuffle(buffer_size = 16, seed = 9).batch(batch
 
 #%% MNIST test
 
-from tensorflow.keras.datasets import mnist
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-# Convert to float32.
-x_train, x_test = np.array(x_train, np.float32), np.array(x_test, np.float32)
-# Normalize images value from [0, 255] to [0, 1].
-x_train, x_test = x_train / 255., x_test / 255.
+# from tensorflow.keras.datasets import mnist
+# (x_train, y_train), (x_test, y_test) = mnist.load_data()
+# # Convert to float32.
+# x_train, x_test = np.array(x_train, np.float32), np.array(x_test, np.float32)
+# # Normalize images value from [0, 255] to [0, 1].
+# x_train, x_test = x_train / 255., x_test / 255.
 
-train_data = tf.data.Dataset.from_tensor_slices((x_train, y_train))
-train_data = train_data.repeat().shuffle(10000).batch(batch_size).prefetch(1)
-re_size = (28,28)
+# train_data = tf.data.Dataset.from_tensor_slices((x_train, y_train))
+# train_data = train_data.repeat().shuffle(10000).batch(batch_size).prefetch(1)
+# re_size = (28,28)
 
 
 #%% GAN Loss function
@@ -184,7 +184,7 @@ def run_optimization(generator, discriminator, real_images, real_label):
             fake_images = generator(noise, training =  True)
             disc_fake = discriminator(fake_images, training = True)
             disc_real = discriminator(real_images, training = True)
-            pdb.set_trace()
+
             disc_loss = discriminator_loss(disc_fake, disc_real, real_label)
         # Training Variables for each optimizer
         gradients_disc = g1.gradient(disc_loss,  discriminator.trainable_variables)
@@ -254,7 +254,7 @@ def ret_GD(generator, discriminator):
                 for j in range(n):
                     # Draw the generated digits
                     canvas[i * re_size[0]:(i + 1) * re_size[0], j* re_size[0]
-                           :(j + 1)*re_size[0],:] = g[j].reshape([re_size[0],re_size[0],1])
+                           :(j + 1)*re_size[0],:] = g[j].reshape([re_size[0],re_size[0],3])
             
             plt.figure(figsize=(n, n))
             plt.imshow(canvas, origin="upper", cmap="gray")
@@ -271,9 +271,44 @@ def ret_GD(generator, discriminator):
 #%% Model class Definition
 from gen_dis_def import Generator, Discriminator, weakDiscriminator, Generator1
 #%% Load model
-generator  = Generator1()
-discriminator =  weakDiscriminator(10)
+generator  = Generator()
+discriminator = Discriminator(10)
 # wdiscream = weakDiscriminator(10)
+#%% Transfer learning
+from keras.applications import InceptionV3
+from keras.models import Sequential
+from keras.layers import Dense, GlobalAveragePooling2D, Dropout
+
+
+# add inception pretrained model, the wieghts 80Mb
+base_cls= tf.keras.applications.InceptionV3(include_top=False, 
+                      pooling='avg', 
+                      weights='../../../Dataset/monkey10K/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5'
+                     )
+# use relu as activation function "vanishing gradiends" :)
+# model.add(Dense(2048, activation="relu"))  
+# # add drop out to avoid overfitting
+# model.add(Dropout(0.25))
+# model.add(Dense(11, activation="softmax"))
+# model.layers[0].trainable=False
+
+class Wrapper(tf.keras.Model):
+    def __init__(self, base_cls):
+        super(Wrapper, self).__init__()
+        
+        self.base_cls = base_cls
+        self.op = tf.keras.layers.Dense(11)
+        
+    def call(self, x):
+        x = tf.reshape(x, [-1, 128, 128, 3])
+        x = self.base_cls(x)
+        x = self.op(x)
+        return tf.nn.softmax(x)
+
+
+warmod = Wrapper(base_cls)
+
+
 #%% train model 
 
 mod_train = (generator, discriminator)
