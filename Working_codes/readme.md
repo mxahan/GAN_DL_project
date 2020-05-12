@@ -15,4 +15,4 @@ Please fix the location of the dataset in the code which is the work_path in the
 
 After fixing them, run the "sga_train.py" in any suitable IDE. 
 
-If having issues, Please let me know via [email](zhasan3@umbc.edu0
+If having issues, Please let me know via [email](zhasan3@umbc.edu)
