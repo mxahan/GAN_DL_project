@@ -1,3 +1,4 @@
+# Code instruction
 Well there are lots of code here.
 
 I will go over the codes that needs to run the Semi-supervised learning code
@@ -27,5 +28,11 @@ Developed Code Description:
 5. GANmodels.py - Another Gan model with different loss function on MNIST dataset
 
 The above mentioned 5 codes we developed for our project. 
+## Extras
 
 The rest of the codes were colleceted from the kaggle website in the begging of the project for starter and baseline check. Kudos to them for their works. 
+
+
+# Additional Option
+
+In the sgan_train.py we enables the option for experimenting with different loss function. Please open the code and find the discriminator_loss and generator_loss function in the code. There just comment in and out the corresponding sections together in the function to change the loss function accordinging. For the WGAN please activate the commented weighted clipping in the discriminator. 
