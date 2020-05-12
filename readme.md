@@ -6,9 +6,9 @@ Project Proposal link: https://drive.google.com/open?id=1MdT1NK2dv749-j0jRR2Toav
 
 ## Short Video presentation of the SGAN and the codes
 
-Video Link: 
+Video Link: https://drive.google.com/open?id=1c_mJZpjAzQWQpH6KKyEF_BI_CIG4E2YU
 
-## Paper Links
+## .gif Links
 DCGAN link: https://drive.google.com/open?id=1aJMNTirSqS1TSuTDoSNDkxvIFn7iW4Hk
 
 
@@ -22,7 +22,7 @@ https://drive.google.com/open?id=15COl7px5dK-TtzfDC3UT4if4Neh_JGzO
 The CatGAN files are 
 - CatGan-Monkey_256.ipynb - For running the dataset in 256x256 resolution
 - CatGan-Monkey_64.ipynb - For running the dataset in 64x64 resolution
--  Kaggle_Monkey_dataset_processing.ipynb - Data processing
+-  Kaggle_Monkey_dataset_processing.ipynb - Data processing (Not used)
 
 Others are developed by different developer. 
 
