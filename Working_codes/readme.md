@@ -13,11 +13,12 @@ Requirement:
 
 Please fix the location of the dataset in the code which is the work_path in the original code. 
 
-After fixing them, run the "sga_train.py" in any suitable IDE. 
+After fixing them, run the "sgan_train.py" in any suitable IDE. 
 
 If having issues, Please let me know via email zhasan3@umbc.edu
 
-Code Description: 
+For SGAN experiments, we have developed five codes to successfully run the SGAN implementation. 
+Developed Code Description: 
 
 1. sgan_train.py  -  The main developed code for running sgan model
 2. gen_dis_def.py - Generator and discriminator defined in this function
@@ -27,4 +28,4 @@ Code Description:
 
 The above mentioned 5 codes we developed for our project. 
 
-The rest of the codes were colleceted from the kaggle website in the begging of the project for starter and baseline check. 
+The rest of the codes were colleceted from the kaggle website in the begging of the project for starter and baseline check. Kudos to them for their works. 
