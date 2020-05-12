@@ -15,4 +15,16 @@ Please fix the location of the dataset in the code which is the work_path in the
 
 After fixing them, run the "sga_train.py" in any suitable IDE. 
 
-If having issues, Please let me know via [email](zhasan3@umbc.edu)
+If having issues, Please let me know via email zhasan3@umbc.edu
+
+Code Description: 
+
+1. sgan_train.py  -  The main developed code for running sgan model
+2. gen_dis_def.py - Generator and discriminator defined in this function
+3. sgan_train_classification.py  -  Consists of classification only model
+4. gan_train.py  - Vanilla gan model for the monkey 10 dataset.
+5. GANmodels.py - Another Gan model with different loss function on MNIST dataset
+
+The above mentioned 5 codes we developed for our project. 
+
+The rest of the codes were colleceted from the kaggle website in the begging of the project for starter and baseline check. 
